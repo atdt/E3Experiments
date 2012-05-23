@@ -18,12 +18,12 @@
  */
 
 $wgExtensionCredits['specialpage'][] = array(
-	'path' => __FILE__,
-	'name' => 'E3 Experiment Loader',
-	'version' => '0.1',
-	'url' => 'https://www.mediawiki.org/wiki/Extension:E3Experiments',
+  'path' => __FILE__,
+  'name' => 'E3 Experiment Loader',
+  'version' => '0.1',
+  'url' => 'https://www.mediawiki.org/wiki/Extension:E3Experiments',
   'author' => array( 'Ori Livneh' ),
-	'descriptionmsg' => 'lastmodified-desc',
+  'descriptionmsg' => 'lastmodified-desc',
 );
 
 $wgResourceModules['ext.E3Experiments'] = array(
