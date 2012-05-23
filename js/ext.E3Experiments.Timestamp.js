@@ -4,10 +4,21 @@
 
 /*jslint white:true */
 /*globals mw, $ */
+$('.lastmodified').css({'font-size': '67%', position: 'static', right: 20, display: 'block' }).appendTo('#firstHeading');
 
 (function () {
     "use strict";
 
+    // Because the LastModified extension uses inline styles, it trumps
+    // stylesheets, so we need to modify it in-place.
+    var style = {
+        'display'   : 'block',
+        'font-size' : '0.5em',
+        'position'  : 'relative',
+        'right'     : '0',
+        'bottom'    : '0'
+    };
+    
     function isEligible() {
         // See also ext.articleFeedback.startup.js
         return (
@@ -26,9 +37,13 @@
 
     function trackTimestamp() {
         $( function () {
-            $( '.lastmodified a' ).attr( 'href', function ( idx, url ) {
+            var el = $( '.lastmodified' );
+
+            $( 'a', el ).attr( 'href', function ( idx, url ) {
                 return $.trackActionURL( url, 'timestamp-history-view' );
             } );
+
+            el.css( style ).appendTo( '#firstHeading' );
         } );
     }
 

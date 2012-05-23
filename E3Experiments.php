@@ -14,7 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
- * @author		Ori Livneh <ori@wikimedia.org>
+ * @author    Ori Livneh <ori@wikimedia.org>
  */
 
 $wgExtensionCredits['specialpage'][] = array(
@@ -23,7 +23,7 @@ $wgExtensionCredits['specialpage'][] = array(
   'version' => '0.1',
   'url' => 'https://www.mediawiki.org/wiki/Extension:E3Experiments',
   'author' => array( 'Ori Livneh' ),
-  'descriptionmsg' => 'lastmodified-desc',
+  'descriptionmsg' => 'E3 Experiment Loader',
 );
 
 $wgResourceModules['ext.E3Experiments'] = array(
@@ -37,5 +37,8 @@ $wgHooks['BeforePageDisplay'][] = 'loadExperiments';
 
 function loadExperiments( $out ) {
   $out->addModules( 'ext.E3Experiments' );
-	return true;
+
+  // Hack. If we defer loading to the Resource Loader, we get FOUCs.
+  $out->addInlineStyle( '.lastmodified { display: none; }' );
+  return true;
 }
