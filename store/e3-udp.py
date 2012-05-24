@@ -3,10 +3,13 @@
     e3-udp
     Log UDP events to MySQL
 
+    usage: e3-udp.py [-h] user password
+
     @file
     @author Ori Livneh
 """
 from datetime import datetime
+import argparse
 import logging
 import socket
 import sys

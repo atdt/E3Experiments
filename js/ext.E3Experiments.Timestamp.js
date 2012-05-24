@@ -2,11 +2,10 @@
  * E3 Timestamp Experiment Campaign Loader
  */
 
-/*jslint white:true */
+/*jslint white:true, vars:true */
 /*globals mw, $ */
-$('.lastmodified').css({'font-size': '67%', position: 'static', right: 20, display: 'block' }).appendTo('#firstHeading');
 
-(function () {
+(function ( global ) {
     "use strict";
 
     // Because the LastModified extension uses inline styles, it trumps
@@ -18,6 +17,8 @@ $('.lastmodified').css({'font-size': '67%', position: 'static', right: 20, displ
         'right'     : '0',
         'bottom'    : '0'
     };
+
+    var event_id = 'timestamp-history-view';
     
     function isEligible() {
         // See also ext.articleFeedback.startup.js
@@ -35,14 +36,16 @@ $('.lastmodified').css({'font-size': '67%', position: 'static', right: 20, displ
         );
     }
 
+    function getTrackingURL() {
+        var uri = $( '#ca-history a' ).attr( 'href' );
+        return $.trackActionURL( encodeURI( uri ), event_id );
+    }
+
     function trackTimestamp() {
         $( function () {
             var el = $( '.lastmodified' );
 
-            $( 'a', el ).attr( 'href', function ( idx, url ) {
-                return $.trackActionURL( url, 'timestamp-history-view' );
-            } );
-
+            $( 'a', el ).attr( 'href', getTrackingURL() );
             el.css( style ).appendTo( '#firstHeading' );
         } );
     }
@@ -63,5 +66,4 @@ $('.lastmodified').css({'font-size': '67%', position: 'static', right: 20, displ
         }
     };
 
-
-}());
+}( this ));
