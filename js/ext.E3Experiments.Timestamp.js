@@ -43,9 +43,14 @@
 
     function trackTimestamp() {
         $( function () {
-            var el = $( '.lastmodified' );
+            var el = $( '.lastmodified' ), a = $( 'a', el );
 
-            $( 'a', el ).attr( 'href', getTrackingURL() );
+            a.attr( 'href', getTrackingURL() );
+            if ( a.text().indexOf('-') !== -1 ) {
+                // Negative timestamp due to bug in LastModified
+                a.text( 'Just updated' );
+            }
+
             el.css( style ).appendTo( '#firstHeading' );
         } );
     }
